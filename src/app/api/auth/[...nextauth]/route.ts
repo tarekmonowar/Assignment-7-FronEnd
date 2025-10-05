@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
 
 const handler = NextAuth({
-  session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -12,23 +15,47 @@ const handler = NextAuth({
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials) {
         try {
           if (!credentials?.email || !credentials?.password) {
             return null;
           }
-          const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/auth/login`,
-            { email: credentials.email, password: credentials.password },
-            { validateStatus: () => true },
-          );
 
-          console.log("Backend response:", res.status, res.data);
+          // Use server-side environment variable (not NEXT_PUBLIC_)
+          const backendUrl = process.env.BACKEND_API_ROUTE;
 
-          if (res.status === 200 && res.data) return res.data;
+          if (!backendUrl) {
+            console.error("BACKEND_API_ROUTE is not defined");
+            return null;
+          }
+
+          const response = await fetch(`${backendUrl}/api/auth/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
+
+          if (!response.ok) {
+            console.error(`Backend responded with status: ${response.status}`);
+            return null;
+          }
+
+          const user = await response.json();
+
+          if (user) {
+            return {
+              id: user.id,
+              email: user.email,
+            };
+          }
           return null;
-        } catch (err) {
-          console.error("Authorize error:", err);
+        } catch (error) {
+          console.error("Authorize error:", error);
           return null;
         }
       },
@@ -54,7 +81,7 @@ const handler = NextAuth({
     signIn: "/auth/login",
     error: "/auth/error",
   },
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
 });
 
 export { handler as GET, handler as POST };
