@@ -137,7 +137,7 @@ const EditProject = () => {
       {/* Project List */}
       <div className="mb-6">
         {fetching ? (
-          <p className="text-white text-center mt-10">Loading blogs...</p>
+          <p className="text-white text-center mt-10">Loading projects...</p>
         ) : (
           projects.map((project) => (
             <div
