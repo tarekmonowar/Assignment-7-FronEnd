@@ -32,6 +32,7 @@ const EditProject = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [fetching, setFetching] = useState(false);
 
   const {
     register,
@@ -44,6 +45,7 @@ const EditProject = () => {
   // Fetch all projects
   const fetchProjects = async () => {
     try {
+      setFetching(true);
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/project`,
       );
@@ -51,6 +53,8 @@ const EditProject = () => {
     } catch (err: any) {
       console.error(err);
       setErrorMsg("Failed to fetch projects");
+    } finally {
+      setFetching(false); // stop loader
     }
   };
 
@@ -132,31 +136,35 @@ const EditProject = () => {
 
       {/* Project List */}
       <div className="mb-6">
-        {projects.map((project) => (
-          <div
-            key={project._id}
-            className="flex justify-between gap-32 items-center max-w-6xl p-2 border-b border-gray-700"
-          >
-            <div>
-              <p className="font-semibold">{project.title}</p>
-              <p className="text-sm text-gray-400">{project.summary}</p>
+        {fetching ? (
+          <p className="text-white text-center mt-10">Loading blogs...</p>
+        ) : (
+          projects.map((project) => (
+            <div
+              key={project._id}
+              className="flex justify-between gap-32 items-center max-w-6xl p-2 border-b border-gray-700"
+            >
+              <div>
+                <p className="font-semibold">{project.title}</p>
+                <p className="text-sm text-gray-400">{project.summary}</p>
+              </div>
+              <div className="flex gap-10">
+                <button
+                  onClick={() => handleEdit(project)}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  onClick={() => handleDelete(project._id)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <FaTrash />
+                </button>
+              </div>
             </div>
-            <div className="flex gap-10">
-              <button
-                onClick={() => handleEdit(project)}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                <FaEdit />
-              </button>
-              <button
-                onClick={() => handleDelete(project._id)}
-                className="text-red-500 hover:text-red-700"
-              >
-                <FaTrash />
-              </button>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* Edit Form */}

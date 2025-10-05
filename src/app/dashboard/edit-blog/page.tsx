@@ -31,6 +31,7 @@ const EditBlog = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [fetching, setFetching] = useState(false);
 
   const {
     register,
@@ -43,6 +44,7 @@ const EditBlog = () => {
   // Fetch all blogs
   const fetchBlogs = async () => {
     try {
+      setFetching(true);
       const res = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/blog`,
       );
@@ -50,6 +52,8 @@ const EditBlog = () => {
     } catch (err: any) {
       console.error(err);
       setErrorMsg("Failed to fetch blogs");
+    } finally {
+      setFetching(false); // stop loader
     }
   };
 
@@ -126,33 +130,38 @@ const EditBlog = () => {
       <h2 className="text-2xl font-bold mb-4 mt-10">Edit Blog</h2>
 
       {/* Blog List */}
-      <div className="mb-6">
-        {blogs.map((blog) => (
-          <div
-            key={blog._id}
-            className="flex justify-between gap-32 items-center max-w-6xl h-30 font-lg p-2 border-b border-gray-700"
-          >
-            <div>
-              <p className="font-semibold">{blog.title}</p>
-              <p className="text-sm text-gray-400">{blog.excerpt}</p>
-            </div>
 
-            <div className="flex gap-10">
-              <button
-                onClick={() => handleEdit(blog)}
-                className="text-blue-500 hover:text-blue-700"
-              >
-                <FaEdit />
-              </button>
-              <button
-                onClick={() => handleDelete(blog._id)}
-                className="text-red-500 hover:text-red-700"
-              >
-                <FaTrash />
-              </button>
+      <div className="mb-6">
+        {fetching ? (
+          <p className="text-white text-center mt-10">Loading blogs...</p>
+        ) : (
+          blogs.map((blog) => (
+            <div
+              key={blog._id}
+              className="flex justify-between gap-32 items-center max-w-6xl h-30 font-lg p-2 border-b border-gray-700"
+            >
+              <div>
+                <p className="font-semibold">{blog.title}</p>
+                <p className="text-sm text-gray-400">{blog.excerpt}</p>
+              </div>
+
+              <div className="flex gap-10">
+                <button
+                  onClick={() => handleEdit(blog)}
+                  className="text-blue-500 hover:text-blue-700"
+                >
+                  <FaEdit />
+                </button>
+                <button
+                  onClick={() => handleDelete(blog._id)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <FaTrash />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* Edit Form */}
