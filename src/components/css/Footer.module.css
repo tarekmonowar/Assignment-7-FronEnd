@@ -1,0 +1,234 @@
+.footer {
+  font-family: "Open Sans", sans-serif;
+  position: relative;
+  background: #000;
+  margin-top: 300px;
+}
+
+.footer_par {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 50px 20px;
+  margin: 0 auto;
+}
+
+.footer_par > div {
+  margin-bottom: 20px;
+}
+
+.footer_par a {
+  display: block;
+}
+
+.footer_par > div > h3 {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+
+@media (max-width: 480px) {
+  .footer_par > div > h3 {
+    font-size: 10px;
+  }
+}
+
+.footer_par h3 svg {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 480px) {
+  .footer_par h3 svg {
+    font-size: 15px;
+  }
+}
+.footer_par span {
+  margin-left: 1rem;
+}
+
+@media (max-width: 480px) {
+  .footer_par span {
+    margin-left: 8px;
+  }
+}
+.footer_par > div > a {
+  color: #ffffff75;
+  font-size: small;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+@media (max-width: 480px) {
+  .footer_par > div > a {
+    font-size: 10px;
+    margin-left: 15px;
+  }
+}
+
+.footer_par > div > a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.footer_social > a {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.footer_social > a > svg {
+  font-size: 1.3rem;
+}
+.footer_copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.footer_copyright p {
+  color: #fff;
+}
+
+.footer_copyright p a {
+  color: #fff;
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.footer_copyright p a:hover {
+  color: #f39c12;
+}
+
+/* Footer Animation */
+.footer_animation {
+  background: rgb(168, 162, 162);
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  top: -300px;
+}
+
+.footer_animation_moto {
+  position: absolute;
+  background: url(https://i.ibb.co/JCGfFJd/moto-net.gif) no-repeat center;
+  height: 200px;
+  width: 150px;
+  left: 50%;
+  bottom: 80px;
+  margin-left: -250px;
+  animation: moto 5s linear infinite;
+}
+
+.footer_animation_car_fume {
+  position: absolute;
+  background: url(https://i.ibb.co/0Qhp4DN/voiture-fumee.gif) no-repeat center;
+  height: 114px;
+  width: 206px;
+  bottom: 10px;
+  left: 50%;
+  margin-left: 250px;
+  animation: carfume 1s linear infinite;
+}
+
+.footer_animation_trees,
+.footer_animation_first_road,
+.footer_animation_second_road {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  background-position-y: 100% !important;
+  animation: parallax 600s linear infinite;
+}
+
+.footer_animation_trees {
+  background-image: url(https://i.ibb.co/nQM4PGJ/arbres.png);
+  bottom: -60px;
+  animation-duration: 1000s;
+}
+
+.footer_animation_first_road {
+  background-image: url(https://i.ibb.co/RQhDWbk/premierplanv3.png);
+  animation-duration: 500s;
+}
+
+.footer_animation_second_road {
+  background-image: url(https://i.ibb.co/J3TjC4W/second-plan.png);
+  animation-duration: 600s;
+}
+
+/* Keyframes */
+@keyframes moto {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+  5% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  25% {
+    transform: translateY(60px) rotate(-20deg);
+  }
+  49% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  51% {
+    transform: translateY(0) rotate(1deg);
+  }
+  75% {
+    transform: translateY(60px) rotate(20deg);
+  }
+  80% {
+    transform: translateY(60px) rotate(0deg);
+  }
+  98% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes carfume {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes parallax {
+  0% {
+    background-position: 260px;
+  }
+  100% {
+    background-position: -10000vw;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  /* .footer_par {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  } */
+
+  /* .footer_par > div {
+    width: 100%;
+  } */
+
+  .footer_animation_car_fume {
+    margin-left: 130px;
+  }
+}

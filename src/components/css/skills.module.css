@@ -1,0 +1,231 @@
+/*!for card section */
+
+.swatch {
+  height: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  min-height: 200px;
+  margin-top: 70px;
+}
+
+@media (max-width: 480px) {
+  .swatch {
+    height: 260px;
+  }
+}
+
+.swatch div {
+  width: 80px;
+  height: 300px;
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0px;
+  border-radius: 5px;
+  border-top: solid 2px rgba(0, 0, 0, 0.2);
+  border-left: solid 3px rgba(255, 255, 255, 0.2);
+  border-bottom: solid 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  box-sizing: border-box;
+  transform-origin: center 90%;
+  display: inline-block;
+  backface-visibility: hidden;
+  margin-left: -38px;
+  transform: rotate(0deg);
+}
+
+@media (max-width: 480px) {
+  .swatch div {
+    width: 60px;
+    height: 180px;
+  }
+}
+
+.swatch div span {
+  position: absolute;
+  left: -39px;
+  display: block;
+  text-align: right;
+  width: 150px;
+  /* background-color: #6730ec; */
+  padding: 5px;
+  transform: rotate(-90deg);
+  font-size: 25px;
+  margin-top: 60px;
+}
+
+@media (max-width: 480px) {
+  .swatch div span {
+    font-size: 15px;
+    left: -48px;
+  }
+}
+
+.swatch div:before {
+  width: 16px;
+  height: 16px;
+  content: "";
+  background-color: var(--white);
+  display: inline-block;
+  border-radius: 8px;
+  bottom: 10px;
+  left: 39px;
+  position: absolute;
+  margin-left: -8px;
+}
+
+@media (max-width: 480px) {
+  .swatch div:before {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    bottom: 5px;
+    left: 29px;
+    margin-left: -5px;
+  }
+}
+
+.swatch div:nth-child(1) {
+  background-color: var(--dk);
+  animation: swatch-dk-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(2) {
+  background-color: var(--purple);
+  animation: swatch-purple-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(3) {
+  background-color: var(--blue);
+  animation: swatch-blue-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(4) {
+  background-color: var(--green);
+  animation: swatch-green-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(5) {
+  background-color: var(--yellow);
+  animation: swatch-yellow-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(6) {
+  background-color: var(--orange);
+  animation: swatch-orange-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(7) {
+  background-color: var(--red);
+  animation: swatch-red-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.swatch div:nth-child(8) {
+  background-color: var(--begun);
+  animation: swatch-begun-motion 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes swatch-dk-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(-90deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-purple-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(-65deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-blue-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(-40deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-green-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(-15deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-yellow-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(15deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-orange-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(40deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-red-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(65deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swatch-begun-motion {
+  0% {
+    transform: rotate(0deg);
+  }
+  30%,
+  70% {
+    transform: rotate(90deg);
+  }
+  90%,
+  10% {
+    transform: rotate(0deg);
+  }
+}

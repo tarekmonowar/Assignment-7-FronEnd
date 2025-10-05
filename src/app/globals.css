@@ -1,0 +1,142 @@
+/* skills carder color */
+
+:root {
+  --begun: #640d5f;
+  --dk: #456570;
+  --red: #f73f52;
+  --orange: #ff9000;
+  --yellow: #0077b6;
+  --green: #582f0e;
+  --blue: #84f8c0;
+  --purple: #815a8f;
+  --white: #ffffff;
+  --rebeccapurple: #663399;
+}
+:root {
+  --color-1: 0 100% 63%;
+  --color-2: 270 100% 63%;
+  --color-3: 210 100% 63%;
+  --color-4: 195 100% 63%;
+  --color-5: 90 100% 63%;
+}
+
+:root {
+  --accent: 280;
+  --speed: 0.25;
+  --transition: calc(var(--speed) * 1s);
+  --timing: ease-out;
+}
+
+:root {
+  --bkg: #5eb3fd;
+  --white: #e7e6e6;
+  --texture: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-primary bg-primary text-white leading-loose;
+  }
+
+  .h1 {
+    @apply text-[40px] xl:text-[55px] leading-[1.1] font-semibold;
+  }
+  .h2 {
+    @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
+  }
+  .h3 {
+    @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 1px #ffffff;
+  }
+
+  .text-outline-hover {
+    -webkit-text-stroke: 1px #00ff99;
+  }
+}
+
+/* Animations for shimmer-button */
+@keyframes shimmer-slide {
+  to {
+    transform: translate(calc(100cqw - 100%), 0);
+  }
+}
+
+@keyframes spin-around {
+  0% {
+    transform: translateZ(0) rotate(0);
+  }
+  15%,
+  35% {
+    transform: translateZ(0) rotate(90deg);
+  }
+  65%,
+  85% {
+    transform: translateZ(0) rotate(270deg);
+  }
+  100% {
+    transform: translateZ(0) rotate(360deg);
+  }
+}
+
+/* Rainbow animation */
+@keyframes rainbow {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}
+
+/* Animation utility classes */
+.animate-shimmer-slide {
+  animation: var(--animate-shimmer-slide);
+}
+
+.animate-spin-around {
+  animation: var(--animate-spin-around);
+}
+
+.animate-rainbow {
+  animation: rainbow 2s linear infinite;
+}
+
+.animate-move {
+  animation: move 3s linear infinite;
+}
+
+/* Font utility classes */
+.font-dm-sans {
+  font-family: var(--font-dm-sans);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

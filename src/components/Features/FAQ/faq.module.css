@@ -1,0 +1,30 @@
+.myModuleWrapper * {
+  box-sizing: border-box;
+}
+
+.myModuleWrapper *::after,
+.myModuleWrapper *::before {
+  box-sizing: border-box;
+}
+
+.myModuleWrapper {
+  margin: auto 0;
+  padding: 1.5px;
+}
+.service {
+  background: #1b1f24;
+  border-radius: 8px;
+  position: relative;
+}
+
+.service::before {
+  content: "";
+  background: linear-gradient(130deg, #ad571a, #720621 41.07%, #287a80 76.05%);
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  z-index: -1;
+  border-radius: 20px;
+}
