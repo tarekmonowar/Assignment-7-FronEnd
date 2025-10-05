@@ -7,6 +7,11 @@ const Blogs = async () => {
     { next: { revalidate: 5 } },
   );
 
+  if (!res.ok) {
+    console.error("Failed to fetch blogs:", res.status, await res.text());
+    return <div>Error loading blogs</div>;
+  }
+
   const blogPosts: BlogPost[] = await res.json();
 
   return <BlogList blogPosts={blogPosts} />;
