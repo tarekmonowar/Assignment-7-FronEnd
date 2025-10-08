@@ -1,25 +1,40 @@
-// src/app/blogs/[id]/page.tsx
-import { BlogPost } from "@/constant/type";
 import { notFound } from "next/navigation";
 import BlogDetailClient from "./BlogDetails";
+import { BlogPost } from "@/constant/type";
 
 export default async function BlogDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = params;
+  let id;
+  try {
+    const resolvedParams = await params;
+    id = resolvedParams.id;
+  } catch (error) {
+    console.log(error);
+    notFound();
+  }
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/blog/${id}`,
-    { next: { revalidate: 5 } },
-  );
+  if (!id) {
+    notFound();
+  }
 
-  const blogPosts: BlogPost = await res.json();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/blog/${id}`,
+      { next: { revalidate: 5 } },
+    );
 
-  if (!blogPosts) notFound();
+    if (!res.ok) {
+      notFound();
+    }
 
-  return <BlogDetailClient post={blogPosts} />;
+    const blogPost: BlogPost = await res.json();
+
+    return <BlogDetailClient post={blogPost} />;
+  } catch (error) {
+    console.log(error);
+    notFound();
+  }
 }
-
-export const dynamicParams = true;
