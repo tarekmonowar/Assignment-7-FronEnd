@@ -135,11 +135,12 @@ const EditProject = () => {
       <h2 className="text-2xl font-bold mb-4 mt-10">Edit Project</h2>
 
       {/* Project List */}
-      <div className="mb-6">
-        {fetching ? (
-          <p className="text-white text-center mt-10">Loading projects...</p>
-        ) : (
-          projects.map((project) => (
+
+      {fetching && <p className="text-gray-400">Loading projects...</p>}
+
+      {!fetching && (
+        <div className="mb-6">
+          {projects.map((project) => (
             <div
               key={project._id}
               className="flex justify-between gap-32 items-center max-w-6xl p-2 border-b border-gray-700"
@@ -163,9 +164,9 @@ const EditProject = () => {
                 </button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Edit Form */}
       {editingProject && (

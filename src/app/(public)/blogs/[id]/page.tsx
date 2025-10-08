@@ -1,15 +1,14 @@
 // src/app/blogs/[id]/page.tsx
-import { notFound } from "next/navigation";
-import { blogPosts } from "@/constant/BlogPost";
-import BlogDetailClient from "./BlogDetails";
 import { BlogPost } from "@/constant/type";
+import { notFound } from "next/navigation";
+import BlogDetailClient from "./BlogDetails";
 
 export default async function BlogDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
+  const { id } = params;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC_API_ROUTE}/api/blog/${id}`,
@@ -21,12 +20,6 @@ export default async function BlogDetailPage({
   if (!blogPosts) notFound();
 
   return <BlogDetailClient post={blogPosts} />;
-}
-
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    id: post.id,
-  }));
 }
 
 export const dynamicParams = true;
