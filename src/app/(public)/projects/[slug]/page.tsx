@@ -18,7 +18,6 @@ export default async function ProjectDetailsPage({
   }
 
   if (!slug) {
-    console.log("No slug provided");
     notFound();
   }
 
@@ -64,7 +63,7 @@ export async function generateStaticParams() {
 
     const projects: ProjectItem[] = await res.json();
     return projects.map((project) => ({
-      slug: project.slug || project._id, // Use slug if available, otherwise fallback to _id
+      slug: project._id,
     }));
   } catch (error) {
     console.log("Error in generateStaticParams:", error);
@@ -97,6 +96,11 @@ export async function generateMetadata({
     return {
       title: project.title,
       description: project.summary || project.title || "Project details",
+      openGraph: {
+        title: project.title,
+        description: project.summary || project.title || "Project details",
+        images: project.cover ? project.cover.map((img) => img.url || img) : [],
+      },
     };
   } catch (error) {
     console.log(error);

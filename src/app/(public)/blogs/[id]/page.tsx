@@ -17,7 +17,6 @@ export default async function BlogDetailPage({
     notFound();
   }
   if (!id) {
-    console.log("No ID provided");
     notFound();
   }
 
